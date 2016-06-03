@@ -19,10 +19,10 @@ SwapbotSocket.open = function () {
 
     var dataCallbackFn = function (data) {
         var event = data.event;
-        console.log('heard data: ', data);
-         setTimeout(function() {
-             new SwapbotEvent(data);
-         }, Math.random() * DELAY_CAP);
+        console.log('heard event: ', data.event.name);
+        setTimeout(function() {
+            new SwapbotEvent(data);
+        }, Math.random() * DELAY_CAP);
     };
 
     var client = SwapbotSocket.subscribeToPusherChanel('all_swapbot_events', dataCallbackFn, onSubscribedFn);

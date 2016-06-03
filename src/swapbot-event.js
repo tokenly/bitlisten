@@ -3,10 +3,10 @@
  *  @extends Floatable
  */
 function SwapbotEvent(eventData) {
-    if (!isValidSwapbotEvent(eventData)) { return; }
 
     var swapData = extractDetailsFromSwapbotEvent(eventData.event);
-    // console.log('swapData', swapData);
+    if (!swapData) { return; }
+    console.log('swapData', swapData);
 
     if (document.visibilityState === "visible") {
         Floatable.call(this);
@@ -55,9 +55,6 @@ function SwapbotEvent(eventData) {
     }
 }
 
-function isValidSwapbotEvent(eventData) {
-    return true;
-}
 
 function extractDetailsFromSwapbotEvent(event) {
     var MAX = 1000;
