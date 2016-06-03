@@ -5,11 +5,6 @@
 	-webkit-box-sizing: border-box;
 }
 
-@font-face {
-    font-family: bitcoinsymbol;
-    src: url(lib/BTC.ttf);
-}
-
 body {
     position: absolute;
 	width: 100%;
@@ -30,7 +25,7 @@ a {
 #pageDiv {
 	background-color: black;
 	background-image: url('images/background.jpg');
-	font-family: "Times New Roman", Times, serif;
+	font-family: Arial, sans-serif;
 	position: relative;
 }
 
@@ -97,6 +92,10 @@ a {
 	color: white;
 	width: inherit;
 	position: absolute;
+
+	font-size: 0.7em;
+	font-family: Arial;
+
 }
 
 .floatableDiv {
@@ -330,6 +329,10 @@ a.boxclose{
 	width: 50%;
 }
     
+.sansserif {
+	font-family: Arial, sans-serif;
+}
+
 .serif {
 	font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
 }

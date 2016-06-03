@@ -1,6 +1,9 @@
 // Set debugmode to true and transactions/trades will be
 // randomly generated, and no outside connections will be made.
 var DEBUG_MODE = false;
+if (window.location.search.indexOf('debug') >= 0) {
+  DEBUG_MODE = true;
+}
 
 var DONATION_ADDRESS;
 var SOUND_DONATION_ADDRESS;
@@ -21,6 +24,9 @@ var blockImage = new Image();
 blockImage.src = "images/block.png";
 
 var debugSpawner;
+
+var AUTOHIDE_TIMEOUT = 15000;
+var autoHide = true;
 
 var updateLayoutWidth = function() {
 	$(".chartMask").css("visibility", "visible");
@@ -55,37 +61,45 @@ $(document).ready(function() {
 	debugSpawner = function() {
 		// Generate some test bubbles
 		if (Math.random() <= 0.1) {
-			// Try to simulate the transaction spread
-			var volume;
-			var order = Math.random();
-			if (order < 0.6) {
-				volume = Math.random();
-			} else if (order < 0.8) {
-				volume = Math.random() * 10;
-			} else if (order < 0.95) {
-				volume = Math.random() * 100;
-			} else {
-				volume = Math.random() * 1000;
+			var r = Math.random();
+			switch (true) {
+				case r < 0.15:
+					new SwapbotEvent({
+						id: 1,
+						event: {
+							name: "swap.stateChange",
+						    botName: "The official TOKENLY bot",
+							state: "complete",
+							assetIn: 'BTC',
+							quantityIn: 0.002,
+							assetOut: 'TOKENLY',
+							quantityOut: Math.round(Math.random() * 100)
+						}
+					});
+				break;
+				case r < 0.30:
+					new SwapbotEvent({
+						id: 2,
+						event: {
+							name: "swap.new",
+						    botName: "Public MERCHANT",
+							state: "brandnew",
+							assetIn: 'BITCRYSTALS',
+							quantityIn: 48,
+							assetOut: 'CYCLOPSCARDTNG',
+							quantityOut: Math.round(Math.random() * 100)
+						}
+					});
+				break;
 			}
-
-			if (Math.random() < 0.5)
-				new Transaction(volume, false);
-			else
-				new Transaction(volume, false, volume * 75, 'USD');
 		}
 	};
-	// Spam the following line into console, it's kind of fun.
-	// new Block(228158, 270, 100 * satoshi, 153 * 1024);
-	
-	switchExchange("bitstamp");
-	
-	// Attach mouseover qr
-	$("#donationAddress").qr();
-	
 });
 
 // Function for handling interface show/hide
 var toggleInterface = function() {
+	autoHide = false;
+
 	if ($(".interface:hidden").length === 0) {
 		$(".interface").fadeOut(500, updateLayoutHeight);
 		$("#hideInterface").html("[ Show Interface ]");
@@ -111,10 +125,8 @@ $(window).bind("load", function() {
 	if (DEBUG_MODE) {
 		setInterval(debugSpawner, 100);
 	} else {
-		if ($("#blockchainCheckBox").prop("checked"))
-			TransactionSocket.init();
-		if ($("#mtgoxCheckBox").prop("checked"))
-			TradeSocket.init();
+		if ($("#swapbotCheckBox").prop("checked"))
+			SwapbotSocket.init();
 	}
 
 	window.requestAnimationFrame(globalUpdate);
@@ -164,7 +176,11 @@ $(window).resize(function() {
 
 window.onbeforeunload = function(e) {
 	clearInterval(globalUpdate);
-	TransactionSocket.close();
-	TradeSocket.close();
+	SwapbotSocket.close();
 };
 
+setTimeout(function() {
+	if (autoHide) {
+		toggleInterface();
+	}
+}, AUTOHIDE_TIMEOUT);

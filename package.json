@@ -1,6 +1,6 @@
 {
-  "name": "BitListen",
-  "author": "Maximillian Laumeister",
+  "name": "ListenToSwapbot",
+  "author": "Maximillian Laumeister, Tokenly Inc.",
   "version": "1.0.0",
   "devDependencies": {
     "grunt-todos": "~0.3.0",

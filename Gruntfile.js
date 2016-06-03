@@ -4,7 +4,7 @@ module.exports = function(grunt) {
 
   var srcFiles = ['src/*.js'];
   var libFiles = ['lib/*.js'];
-  var destFile = 'bitlisten.min.js';
+  var destFile = 'listen.min.js';
 
   // Project configuration.
   grunt.initConfig({

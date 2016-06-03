@@ -77,7 +77,8 @@ Sound.init = function() {
 			Howler.volume(globalVolume * 0.01);
 	});
 	
-	globalScalePitch = $("#scalePitchCheckBox").attr("checked");
+	// globalScalePitch = $("#scalePitchCheckBox").attr("checked");
+	globalScalePitch = true;
 	Sound.change(0);
 };
 
