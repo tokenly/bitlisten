@@ -61,6 +61,7 @@ function extractDetailsFromSwapbotEvent(event) {
     var NEW_SPREAD = 800;
 
     if (event.name == "swap.stateChange" && event.state == 'complete') {
+        console.log('complete event:', event);
         return {
             name: "Swap Complete",
             normalizedQuantity: event.quantityOut,
@@ -71,6 +72,7 @@ function extractDetailsFromSwapbotEvent(event) {
     }
 
     if (event.name == 'swap.new') {
+        console.log('new event:', event);
         return {
             name: "New Swap",
             normalizedQuantity: event.quantityOut,
@@ -82,6 +84,7 @@ function extractDetailsFromSwapbotEvent(event) {
 }
 
 function roundSwapQuantity(qIn) {
+    if (isNaN(qIn)) { return '?'; }
     var isInt = Math.round(qIn * 1000) == (Math.round(qIn) * 1000);
     if (isInt) { return Math.round(qIn); }
     
