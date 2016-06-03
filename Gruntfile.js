@@ -19,7 +19,7 @@ module.exports = function(grunt) {
     },
     uglify: {
       options: {
-        banner: '/*! <%= pkg.name %> Copyright (c) <%= grunt.template.today("yyyy") %> Maximillian Laumeister, see README.md for license info. */\n',
+        banner: '/*! <%= pkg.name %> Copyright (c) <%= grunt.template.today("yyyy") %> Maximillian Laumeister, Tokenly, Inc., see README.md for license info. */\n',
         sourceMap: true,
         sourceMapIncludeSources: true
       },
