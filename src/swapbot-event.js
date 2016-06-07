@@ -60,7 +60,7 @@ function extractDetailsFromSwapbotEvent(event) {
     var MAX = 1000;
     var NEW_SPREAD = 800;
 
-    if (event.name == "swap.stateChange" && event.state == 'complete') {
+    if (event.name == 'swap.complete') {
         console.log('complete event:', event);
         return {
             name: "Swap Complete",

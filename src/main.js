@@ -67,7 +67,7 @@ $(document).ready(function() {
 					new SwapbotEvent({
 						id: 1,
 						event: {
-							name: "swap.stateChange",
+							name: "swap.complete",
 						    botName: "The official TOKENLY bot",
 							state: "complete",
 							assetIn: 'BTC',
